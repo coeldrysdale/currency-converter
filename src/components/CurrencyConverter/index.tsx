@@ -11,35 +11,56 @@ export default function CurrencyConverter({
   currencies,
   currencyOptions,
 }: CurrencyConverterProps) {
-  const [currency, setCurrency] = useState("eur");
-  const [currency2, setCurrency2] = useState("usd");
-  const [value, setValue] = useState(0);
-  const [value2, setValue2] = useState(0);
+  const [currency, setCurrency] = useState("EUR");
+  const [currency2, setCurrency2] = useState("USD");
+  const [value, setValue] = useState(1);
+  const [value2, setValue2] = useState(1);
 
-  console.log(
-    { currency: currency, amount: value },
-    { currency: currency2, amount: value2 }
-  );
+  const defaultCurrencyMain = currencyOptions.find((cur) => cur.value === currency);
+  const defaultCurrencySub = currencyOptions.find((cur) => cur.value === currency2);
+
+  function calcFX(currency: string, val: number) {
+    const exchangeRate = currencies.find((cur) => cur.currency === currency2)?.rate || 1;
+    switch (currency) {
+      case "main":
+        // if main currency is updated, we need to update value of sub
+        setValue(val);
+        setValue2(val * +exchangeRate);
+        break;
+
+      case "sub":
+        // if sub currency is updated, we need to update value of main
+        setValue(val / +exchangeRate);
+        setValue2(val);
+        break;
+
+      default:
+        break;
+    }
+  }
 
   return (
     <div className="flex gap-4">
       <div className="w-full">
         <CurrencyOptionBox
-          currency={currency}
+          currency={defaultCurrencyMain}
           value={value}
           options={currencyOptions}
           updateCurrency={(val: string) => setCurrency(val)}
-          updateAmount={(val: string) => setValue(+val)}
+          updateAmount={(val: string) => calcFX("main", +val)}
+          // updateAmount={(val: string) => setValue(+val)}
         />
       </div>
       <div>to</div>
       <div className="w-full">
         <CurrencyOptionBox
-          currency={currency}
-          value={value}
+          currency={defaultCurrencySub}
+          value={value2}
           options={currencyOptions}
           updateCurrency={(val: string) => setCurrency2(val)}
-          updateAmount={(val: string) => setValue2(+val)}
+          updateAmount={(val: string) => calcFX("sub", +val)}
+
+          // updateAmount={(val: string) => setValue2(+val)}
         />
       </div>
     </div>

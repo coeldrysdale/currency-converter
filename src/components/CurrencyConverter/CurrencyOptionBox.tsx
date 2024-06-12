@@ -2,8 +2,9 @@ import { SelectOption } from "../../types";
 import Select from "react-select";
 
 type CurrencyOptionBoxProps = {
-  currency: string;
+  currency?: SelectOption;
   value: number;
+  exchangeRate?: number;
   options: SelectOption[];
   updateCurrency: (val: string) => void;
   updateAmount: (val: string) => void;
@@ -12,23 +13,30 @@ type CurrencyOptionBoxProps = {
 export default function CurrencyOptionBox({
   currency,
   value,
+  exchangeRate,
   options,
   updateCurrency,
   updateAmount,
 }: CurrencyOptionBoxProps) {
-  const defaultValue = options.find((opt) => opt.label == currency);
-  return (
+  // const fx = { exchangeRate: "1.073", cur: "USD" };
+
+  return currency ? (
     <div className="flex flex-col">
+      <p>1 {currency.value} =</p>
       <div>
         <Select
-          defaultValue={defaultValue}
+          defaultValue={currency}
           options={options}
           onChange={(val) => updateCurrency(val?.value || "")}
         />
       </div>
       <div>
-        <input type="number" onChange={(val) => updateAmount(val.target.value)} />
+        <input
+          type="number"
+          value={value}
+          onChange={(val) => updateAmount(val.target.value)}
+        />
       </div>
     </div>
-  );
+  ) : null;
 }

@@ -1,5 +1,6 @@
 [
-  { "currency": "USD", "rate": "1.0730", "description": "United States Dollar" },
+  { "currency": "EUR", "rate": "1", "description": "Euro" },
+  { "currency": "USD", "rate": "1.08", "description": "United States Dollar" },
   { "currency": "JPY", "rate": "168.46", "description": "Japanese Yen" },
   { "currency": "BGN", "rate": "1.9558", "description": "Bulgarian Lev" },
   { "currency": "CZK", "rate": "24.706", "description": "Czech Koruna" },

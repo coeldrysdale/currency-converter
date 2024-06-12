@@ -25,7 +25,7 @@ function App() {
   });
 
   return (
-    <div className="App">
+    <div className="bg-slate-900 h-screen text-white w-100">
       <div className="max-w-xl m-auto py-16">
         <h1 className="text-xl mb-4">Currency Converter</h1>
         <CurrencyConverter currencies={currencies} currencyOptions={currencyOptions} />

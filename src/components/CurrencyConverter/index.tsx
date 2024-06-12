@@ -46,7 +46,7 @@ export default function CurrencyConverter({
   }
 
   return (
-    <div className="flex gap-4">
+    <div className="flex gap-4 items-center">
       <div className="w-full">
         <CurrencyOptionBox
           currency={defaultCurrencyMain}

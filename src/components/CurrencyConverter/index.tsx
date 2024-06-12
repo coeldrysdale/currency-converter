@@ -13,17 +13,34 @@ export default function CurrencyConverter({
 }: CurrencyConverterProps) {
   const [currency, setCurrency] = useState("eur");
   const [currency2, setCurrency2] = useState("usd");
-  const [amount, setAmount] = useState(0);
-  const [amount2, setAmount2] = useState(0);
+  const [value, setValue] = useState(0);
+  const [value2, setValue2] = useState(0);
+
+  console.log(
+    { currency: currency, amount: value },
+    { currency: currency2, amount: value2 }
+  );
 
   return (
     <div className="flex gap-4">
       <div className="w-full">
-        <CurrencyOptionBox options={currencyOptions} />
+        <CurrencyOptionBox
+          currency={currency}
+          value={value}
+          options={currencyOptions}
+          updateCurrency={(val: string) => setCurrency(val)}
+          updateAmount={(val: string) => setValue(+val)}
+        />
       </div>
       <div>to</div>
       <div className="w-full">
-        <CurrencyOptionBox options={currencyOptions} />
+        <CurrencyOptionBox
+          currency={currency}
+          value={value}
+          options={currencyOptions}
+          updateCurrency={(val: string) => setCurrency2(val)}
+          updateAmount={(val: string) => setValue2(+val)}
+        />
       </div>
     </div>
   );

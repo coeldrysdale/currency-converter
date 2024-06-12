@@ -19,7 +19,7 @@ function App() {
   }, []);
 
   const currencyOptions = currencies.map((cur) => {
-    return { value: cur.currency, label: cur.country };
+    return { value: cur.currency, label: cur.description };
   });
 
   return (

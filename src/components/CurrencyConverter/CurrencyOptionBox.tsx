@@ -7,7 +7,7 @@ type CurrencyOptionBoxProps = {
   exchangeRate?: number;
   options: SelectOption[];
   updateCurrency: (val: string) => void;
-  updateAmount: (val: string) => void;
+  updateAmount: (val: number) => void;
 };
 
 export default function CurrencyOptionBox({
@@ -34,7 +34,7 @@ export default function CurrencyOptionBox({
         <input
           type="number"
           value={value}
-          onChange={(val) => updateAmount(val.target.value)}
+          onChange={(val) => updateAmount(+val.target.value)}
         />
       </div>
     </div>
